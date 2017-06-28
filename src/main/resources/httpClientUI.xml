@@ -1,0 +1,27 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+<import resource="classpath:hw-service-invocation-config.xml" />
+<!-- 	<import resource="classpath:spring-http-client-config.xml" /> -->
+	<!-- <import resource="classpath:hw-trace-logging.xml" /> -->
+	<!-- <import resource="classpath:hw-delegate.xml" /> -->
+	
+	<bean id="httpHwStoreService"
+		class="com.sdm.hw.serviceinvocation.services.HwHttpInvokerProxyFactoryBean">
+		<!-- class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean" -->
+		<!-- Time out featuers -->
+		<!-- serviceUrl represents Http Service Url called -->
+		<property name="serviceUrl" value="" />
+		<!-- serviceInterface represents Http Service Interface called -->
+		<property name="serviceInterface" value="com.sdm.hw.store.intf.HwStoreService" />
+		<property name="httpInvokerRequestExecutor" ref="httpReqExecutor" />
+		</bean>
+	<bean id="httpHwReportService"
+		class="com.sdm.hw.serviceinvocation.services.HwHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl" value="" />
+		<property name="serviceInterface" value="com.sdm.hw.report.intf.HwReportService" />
+		<property name="httpInvokerRequestExecutor" ref="httpReqExecutorforReports" />
+	</bean>
+</beans>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<hwServiceInvocationInfo>
+	<businessComponent name="store">
+		<services>
+			<service name="HwStoreService">
+				<exposedServiceName>delta</exposedServiceName>
+				<mappedServiceName>hwStoreService</mappedServiceName>
+				<clientServiceName>httpHwStoreService</clientServiceName>
+				<enableSSL>false</enableSSL>
+				<availableOnCentralServer>false</availableOnCentralServer>
+			</service>
+		</services>
+	</businessComponent>
+	<businessComponent name="report">
+		<services>
+			<service name="HwReportService">
+				<exposedServiceName>report</exposedServiceName>
+				<mappedServiceName>reportService</mappedServiceName>
+				<clientServiceName>httpHwReportService</clientServiceName>
+				<enableSSL>false</enableSSL>
+				<availableOnCentralServer>false</availableOnCentralServer>
+			</service>
+		</services>
+	</businessComponent>
+
+</hwServiceInvocationInfo>
+

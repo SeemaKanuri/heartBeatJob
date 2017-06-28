@@ -1,0 +1,96 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:service-invocation-config.properties</value>
+			</list>
+		</property>
+	</bean>
+	<!-- <bean id="jmsConnectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean"> 
+		<property name="jndiName" value="${connectionFactoryJndiName}"/> <property 
+		name="jndiEnvironment"> <props> <prop key="java.naming.provider.url">${queueURL}</prop> 
+		<prop key="java.naming.factory.initial">com.ibm.websphere.naming.WsnInitialContextFactory</prop> 
+		</props> </property> <property name="lookupOnStartup" value="false"/> <property 
+		name="cache" value="true"/> <property name="proxyInterface" value="javax.jms.ConnectionFactory"/> 
+		</bean> <bean id="jmsQueue" class="org.springframework.jndi.JndiObjectFactoryBean"> 
+		<property name="jndiName" value="${queueJndiName}"/> <property name="jndiEnvironment"> 
+		<props> <prop key="java.naming.provider.url">${queueURL}</prop> <prop key="java.naming.factory.initial">com.ibm.websphere.naming.WsnInitialContextFactory</prop> 
+		</props> </property> <property name="lookupOnStartup" value="false"/> <property 
+		name="cache" value="true"/> <property name="proxyInterface" value="javax.jms.Queue"/> 
+		</bean> -->
+	<!-- add time out feauters -->
+	<bean id="httpReqExecutor"
+		class="com.sdm.hw.serviceinvocation.services.HwHttpInvokerRequestExecutor">
+		
+		
+		<property name="httpClient">
+
+			<bean class=" org.apache.commons.httpclient.HttpClient">
+				<constructor-arg>
+					<bean id="httpConnectionmanager"
+						class="org.apache.commons.httpclient.MultiThreadedHttpConnectionManager" />
+				</constructor-arg>
+				<property name="params">
+					<bean class="org.apache.commons.httpclient.params.HttpClientParams">
+
+						<property name="soTimeout" value="100000" />
+						<!-- <property name="connectionManagerTimeout" value="2000" /> -->
+					</bean>
+				</property>
+
+				<property name="connectionTimeout" value="${serviceConnectionTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="httpReqExecutorforReports"
+		class="com.sdm.hw.serviceinvocation.services.HwHttpInvokerRequestExecutor">
+		
+		
+		<property name="httpClient">
+
+			<bean class=" org.apache.commons.httpclient.HttpClient">
+				<constructor-arg>
+					<bean id="httpConnectionmanager1"
+						class="org.apache.commons.httpclient.MultiThreadedHttpConnectionManager" />
+				</constructor-arg>
+				<!-- <property name="params">
+					<bean class="org.apache.commons.httpclient.params.HttpClientParams">
+						<property name="soTimeout" value="100000" />
+					</bean>
+				</property> -->
+
+				<property name="connectionTimeout" value="${serviceConnectionTimeout}" />
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- <bean id="httpReqExecutorforPresc"
+		class="com.sdm.hw.serviceinvocation.services.HwHttpInvokerRequestExecutor">
+		
+		
+		<property name="httpClient">
+
+			<bean class="org.apache.commons.httpclient.HttpClient">
+				<constructor-arg>
+					<bean id="httpConnectionmanager2"
+						class="org.apache.commons.httpclient.MultiThreadedHttpConnectionManager" />
+				</constructor-arg>
+				 <property name="params">
+					<bean class="org.apache.commons.httpclient.params.HttpClientParams">
+						<property name="soTimeout" value="150000" />
+					</bean>
+				</property> 
+
+				<property name="connectionTimeout" value="${serviceConnectionTimeout}" />
+			</bean>
+		</property>
+	</bean> -->
+</beans>
+
+
